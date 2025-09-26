@@ -1,1 +1,305 @@
-ggh
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yedanaw Television</title>
+<meta name="description" content="Official website for Yedanaw TV - video archive, about, contact.">
+<style>
+:root {
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent:#f59e0b;
+  --green:#10b981;
+  --muted:#94a3b8;
+  --text:#e6eef8;
+  --menu-width:250px;
+}
+[data-theme="white"] {
+  --bg:#fff;
+  --card:#f4f4f4;
+  --accent:#10b981;
+  --green:#047857;
+  --muted:#555;
+  --text:#000;
+}
+
+/* General styles */
+*{box-sizing:border-box;}
+body{margin-top:0;padding:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background: var(--bg); color: var(--text); transition: all 0.3s;}
+.wrap{max-width:1200px;margin:0 auto;padding:16px; display:flex; flex-direction:column; gap:37px;}
+
+/* Hero Section */
+.hero {width:100%; height:400px; background: url('hero-bg.jpg') center/cover no-repeat; position: relative; border-radius:12px; margin-bottom:16px; transition: height 0.3s;}
+.hero-overlay {position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#fff; padding:20px;}
+.hero-overlay h1 {font-size:36px; margin-bottom:12px;}
+.hero-overlay p {font-size:18px; margin-bottom:50px;}
+.hero-overlay .btn {font-size:16px; padding:12px 20px; border-radius:12px; text-decoration:none; font-weight:700; color:#fff; background: linear-gradient(45deg, #ff0000, #ff4c4c, #ff0000); background-size: 300% 300%; animation: gradientMove 3s ease infinite; box-shadow:0 6px 20px rgba(255,0,0,0.5); transition: all 0.3s;}
+
+/* Top row */
+.row-top{display:flex; justify-content:space-between; align-items:center; gap:3px;}
+.brand{display:flex; align-items:center; gap:12px;}
+.logo{width:60px;height:60px;background:linear-gradient(135deg,#10b981,#047857);border-radius:14px;display:grid;place-items:center;font-weight:700;color:var(--text);font-size:28px;box-shadow:0 6px 16px rgba(0,0,0,0.4);}
+.title{font-size:18px;font-weight:700;}
+.subtitle{color:var(--muted); font-size:13px; margin-left:6px;}
+.top-actions{display:flex; gap:10px;}
+.btn{display:inline-flex;align-items:center;padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none;transition: all 0.4s cubic-bezier(0.4,0,0.2,1);}
+
+/* Scrollable nav */
+.nav-scroll{display:flex; overflow-x:auto; gap:8px; margin:3px 0; scrollbar-color: black transparent; scrollbar-width: thin; align-items:center;}
+.nav-scroll::-webkit-scrollbar{height:4px;}
+.nav-scroll::-webkit-scrollbar-thumb{background:black; border-radius:3px;}
+.nav-scroll::-webkit-scrollbar-track{background:transparent;}
+.nav-scroll a{flex:0 0 auto;text-align:center;padding:12px 16px;border-radius:12px;font-weight:700;text-decoration:none;background:linear-gradient(90deg,#ff416c,#ff4b2b);color:#fff;white-space:nowrap;transition: all 0.4s cubic-bezier(0.4,0,0.2,1);}
+.live-btn{background:#10b981; color:#fff;}
+.mood-btn{background:linear-gradient(135deg,#047857,#10b981);}
+.time-btn{background:linear-gradient(135deg,#ff416c,#ff4b2b); color:#fff; padding:10px 14px; border-radius:10px; font-weight:700;}
+
+/* Side menu */
+.menu-icon{font-size:24px; cursor:pointer; padding:10px; background:linear-gradient(45deg,#ff416c,#ff4b2b); border-radius:10px; margin-right:5px; color:#fff;}
+.side-menu{position:fixed; top:0; right:-100%; width:var(--menu-width); max-width:80%; height:100%; background:var(--card); z-index:1000; transition: right 0.3s; box-shadow:-5px 0 25px rgba(0,0,0,0.7); display:flex; flex-direction:column; padding:20px; gap:10px;}
+.side-menu.open{right:0;}
+.side-menu a{color:#fff; text-decoration:none; font-weight:700; padding:12px; border-radius:10px; background:linear-gradient(135deg,#ff4c4c,#ff0000); transition: all 0.3s;}
+.side-menu a:hover{transform:scale(1.05); box-shadow:0 5px 15px rgba(255,0,0,0.6);}
+
+/* Video grid */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 per row on desktop */
+  gap:24px; /* spacing between videos */
+  margin-bottom:50px;
+}
+@media(max-width:1024px){.video-grid{grid-template-columns:1fr; gap:20px;}}
+@media(max-width:600px){.video-grid{grid-template-columns:1fr; gap:16px;}}
+
+/* Video tiles */
+.video-tile{position:relative; overflow:hidden; border-radius:16px; background:var(--card); cursor:pointer; display:flex; flex-direction:column; transition: transform 0.3s ease, box-shadow 0.3s ease;}
+.video-tile img{width:100%; height:auto; display:block; border-radius:16px; transition: transform 0.3s ease, filter 0.3s ease;}
+.video-tile:hover{transform: scale(1.05) translateY(-5px); box-shadow:0 25px 50px rgba(0,0,0,0.5); z-index:2;}
+.video-tile:hover img{transform: scale(1.1); filter: brightness(1.1) drop-shadow(0 15px 30px rgba(0,0,0,0.5));}
+.video-title{padding:6px 0; font-weight:700; font-size:14px; color:var(--accent); text-align:center; transition: all 0.3s;}
+.video-title:hover{color: var(--green); text-shadow:0 0 10px var(--green),0 0 20px var(--green);}
+.watch-btn{margin-top:5px;text-align:center;padding:12px 0;border-radius:12px;font-weight:700;text-decoration:none;color:#fff; background: linear-gradient(45deg, #ff0000, #ff4c4c, #ff0000); background-size: 300% 300%; animation: gradientMove 3s ease infinite; box-shadow:0 6px 20px rgba(255,0,0,0.5); transition: all 0.3s;}
+
+/* Kitab section */
+.kitab-card{background:var(--card); padding:16px; border-radius:12px; margin-top:3px; box-shadow:0 6px 18px rgba(0,0,0,0.3);}
+.kitab-card h3{margin-bottom:8px;}
+
+/* About & Contact ultra modern */
+.card{background:linear-gradient(145deg, #0c1a2a, #0f2236); padding:20px; border-radius:16px; margin-top:10px; box-shadow:0 0 20px rgba(16,185,129,0.4); transition: all 0.3s;}
+.card:hover{box-shadow:0 0 30px rgba(16,185,129,0.7);}
+.about-box h4 span{color:var(--green); display:inline-block; animation:bounce 1s infinite;}
+.contact-box p{margin:6px 0; font-weight:600;}
+.contact-box p span{color:#cyan; font-weight:bold; text-decoration:underline; cursor:pointer;}
+
+/* About & Contact text visible in white mode with ultra colors */
+[data-theme="white"] .about-box h4,
+[data-theme="white"] .contact-box h4 { color: pink !important; } /* ultra red headers */
+[data-theme="white"] .about-box p,
+[data-theme="white"] .contact-box p { color: #ff416c !important; } /* ultra pink/red paragraphs */
+[data-theme="white"] .about-box span,
+[data-theme="white"] .contact-box span { color: #green !important; } /* ultra purple highlights */
+
+/* Bottom Buttons */
+.bottom-actions{display:flex; gap:10px; justify-content:center; margin-top:20px;}
+.bottom-actions a{flex:1; text-align:center; padding:12px 0; border-radius:12px; font-weight:700; text-decoration:none; background:linear-gradient(45deg,#ff0000,#ff4c4c,#ff0000); background-size:300% 300%; animation: gradientMove 3s ease infinite; color:#fff; transition: all 0.3s;}
+<!-- Bottom Buttons -->
+<div class="bottom-actions">
+  <a href="https://youtube.com/@khalidelbehjan?si=FRoliX3fWIRUusYb" target="_blank">YouTube</a>
+  <a href="https://.youtube.com/@khalidelbehjan?si=FRoliX3fWIRUusYb" target="_blank">life lesson</a>
+  <a href="https://.youtube.com/@khalidelbehjan-2?si=QSnlwgzdwdY0JieA" target="_blank">Ar Risala</a>
+</div>
+/* Footer logos */
+.footer-channels{display:flex; gap:17px; justify-content:center; margin-bottom:200px;}
+.footer-channels a img{width:50px;height:50px;border-radius:50%;transition: all 0.3s;}
+.footer-channels a img:hover{transform: scale(1.2) rotate(-5deg); box-shadow: 0 8px 30px rgba(255,255,255,0.7);}
+footer{margin-bottom:30px;color:#fff; background:#071226; font-size:12px; text-align:center; padding:10px;}
+
+/* Animations */
+@keyframes gradientMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(3px);}}
+
+/* Mobile-specific button colors */
+@media(max-width:600px){
+  .bottom-actions a {background: linear-gradient(135deg, #10b981, #047857); color: #fff;}
+  .live-btn {background: #10b981 !important; color: #fff !important;}
+  .hero{height:250px;}
+  .side-menu{width:200px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-overlay">
+      <h1>Welcome to Yedanaw TV 📺</h1>
+      <p>Explore the latest Religional, cultural, and entertaining videos!</p>
+      <a href="https://youtube.com/@khalidel-behjan" target="_blank" class="btn">Click Me 👀</a>
+    </div>
+  </div>
+
+  <!-- Top row -->
+  <div class="row-top">
+    <div class="brand">
+      <div class="logo">📺</div>
+      <div>
+        <div class="title">Yedanaw TV</div>
+        <div class="subtitle">Videos, Posts & Audios</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <a href="https://youtube.com/@khalidel-behjan" target="_blank" class="btn">▶ Subscribe</a>
+      <a href="https://t.me/YedanawTv" target="_blank" class="btn">➣ Telegram</a>
+    </div>
+  </div>
+
+  <!-- Scrollable nav -->
+  <div class="nav-scroll">
+    <div class="menu-icon" id="menuToggle">☰</div>
+    <a href="index.html">Home</a>
+    <a href="quraannn.html">Quran</a>
+    <a href="kitab.html">Kitab</a>
+    <a href="books.html">Books</a>
+    <a href="about.html">About</a>
+    <a href="https://www.youtube.com/live/yeDY8mD86Is?si=U1VzkfTER_ezdsfb" class="live-btn">🔴 Live</a>
+    <a href="#" class="mood-btn" id="signModeBtn">🌙/☀</a>
+    <a href="#" class="time-btn" id="liveTime">⏰</a>
+  </div>
+
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu">
+    <a href="about.html">About</a>
+    <a href="quraannn.html">Quran</a>
+    <a href="kitab.html">Kitab</a>
+    <a href="books.html">Books</a>
+    <a href="https://t.me/YedanawTv">Telegram</a>
+  </div>
+
+  <!-- Featured / Kitab Section -->
+  <div class="kitab-card">
+    <h3>Featured YouTube Videos </h3>
+    <p>Check out our latest featured content!</p>
+  </div>
+
+  <!-- Video Grid -->
+  <div class="video-grid" id="videos"></div>
+
+  <!-- About Box -->
+  <div class="card about-box">
+    <h4>About the Channel <span>▼</span></h4>
+    <p>Yedanaw TV 📺 is a ultra-modern media platform for Islamic education and entertaining content. We aim to expansion islamic content for 🌏.
+    <br>
+
+   የዳናው ቲቪ ገፅ በዋነኝነት ከድሮ - ዘንድሮ ያሉትን የመንዙማና ተያያዥ ስራዎችን ፤ ዘርፈ ብዙ  ኢስላማዊ የሆኑ ይዘቶችን በታማኝነትና በላቀ ጥራት  ያቀርባል! 
+💢 በተጨማሪም....♻ ያጋዳሉ  ያልናቸውን ይዘቶች ዘወትር ወደናንተ ይዘን ጎራ የምንልበት ገፅ ነው !
+<br><hr>
+#<b>የዳናው ቲቪ</b><br>
+#<b>የዐሪፎች ስንቅ!</b>
+
+    </bt></p>
+  </div>
+
+  <!-- Contact Box -->
+  <div class="card contact-box">
+    <h4>Contact Us</h4>
+    <p>📧 Email : <span onclick="window.location='mailto:infokhalidnet.com@gmail.com'">  infokhalidnet.com@gmail.com</span></p>
+    <p>☎️ Phone: +251 913530279 / 953548660</span></p>
+  <hr> <p style="font-weight:700; color:red;">🎩..𝙠𝙝𝙖𝙡𝙞𝙙N𝙚t.</p>
+  </div>
+    <p><b> 
+❤️ Join the Family Today ▼
+ </b></p>
+  <!-- Bottom Buttons -->
+  <div class="bottom-actions">
+    <a href="https://youtube.com/@khalidel-behjan" target="_blank">▶Yedanaw</a>
+    <a href="https://youtube.com/@khalidelbehjan?si=mlW_i7h4vEjFzg2C" target="_blank">▶Life Lesson</a>
+    <a href="https://youtube.com/@khalidelbehjan-2?si=qn9fUX51Nvu07pGG" target="_blank">▶Ar Risala</a>
+  </div>
+
+  <!-- Footer Logos -->
+  <div class="footer-channels">
+    <a href="#"><img src="Tenzil.png" alt="Tenzil"></a>
+    <a href="#"><img src="yedanaw.png" alt="Yedanaw TV"></a>
+    <a href="#"><img src="life.png" alt="Life Lesson"></a>
+  </div>
+
+  <footer>© <span id="year"></span> Yedanaw Television — Built with ♥</footer>
+</div>
+
+<script>
+// Video list
+const videoLinks = [
+  {id:"vRCjtLLY19U", title:"▶ ሸይኽ አወል ሰዓድያ መሳጭ ሀድራ | የዳናው 📺 |"},
+  {id:"Bf9nSxdtzI0", title:"▶ ሸይኽ ኢማም አህመድ ማራኪ በሆነ ድምፅ | የዳናው 📺 |"},
+  {id:"w1bk4d07zqQ", title:"▶ሸይኽ ጀማል ጣጢሳ ዘይኑ ነቢ... | የዳናው 📺 |"},
+  {id:"fGiydaW87BM", title:"▶ ሸይኽ ኢማም ሀፊዝ (ከረም) ጣፋጭ  ሰማኒያ |የዳናው 📺|"},
+  {id:"oLqQr7jcjXA", title:"ሼኽ ሁሴን  (ዶሮግብር ) ጦለዓ |የዳናው 📺|"},
+  {id:"NWKqgWJ4NYA", title:"▶ ሼኾቹ ህዝቡን በእምባ አራጩት  |የዳናው 📺| "}
+];
+
+const videosContainer=document.getElementById('videos');
+videoLinks.forEach(v=>{
+  const tile=document.createElement('div');
+  tile.className='video-tile';
+  const a=document.createElement('a');
+  a.href=`https://youtu.be/${v.id}`;
+  a.target="_blank";
+  const img=document.createElement('img');
+  img.src=`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+  a.appendChild(img);
+
+  const titleDiv=document.createElement('div');
+  titleDiv.className='video-title';
+  titleDiv.textContent=v.title;
+
+  const watchBtn=document.createElement('a');
+  watchBtn.href=`https://youtu.be/${v.id}`;
+  watchBtn.target="_blank";
+  watchBtn.className='watch-btn';
+  watchBtn.textContent='▶ Watch on YouTube';
+
+  tile.appendChild(a);
+  tile.appendChild(titleDiv);
+  tile.appendChild(watchBtn);
+  videosContainer.appendChild(tile);
+});
+
+// Footer year
+document.getElementById('year').textContent=new Date().getFullYear();
+
+// Live time
+function updateTime(){document.getElementById('liveTime').textContent=new Date().toLocaleTimeString();}
+updateTime();
+setInterval(updateTime,1000);
+
+// Mood toggle
+const signBtn=document.getElementById('signModeBtn');
+let isDark=true;
+signBtn.addEventListener('click',()=>{
+  if(isDark){
+    document.documentElement.setAttribute('data-theme','white');
+    signBtn.textContent='️🌙';
+    isDark=false;
+  }else{
+    document.documentElement.removeAttribute('data-theme');
+    signBtn.textContent='☀️';
+    isDark=true;
+  }
+});
+
+// Side menu toggle
+const menuToggle=document.getElementById('menuToggle');
+const sideMenu=document.getElementById('sideMenu');
+menuToggle.addEventListener('click',()=>{
+  sideMenu.classList.toggle('open');
+});
+</script>
+</body>
+</html>
