@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yedanaw Television</title>
+<meta name="description" content="Official website for Yedanaw TV - video archive, about, contact.">
+
+<style>
+:root {
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent:#f59e0b;
+  --green:#10b981;
+  --muted:#94a3b8;
+  --text:#e6eef8;
+  --btn-bg:#ff416c;
+  --btn-text:#fff;
+  --gap:12px;
+  --max-width:1200px;
+}
+[data-theme="white"] {
+  --bg:#fff;
+  --card:#f4f4f4;
+  --accent:#ff6b6b;
+  --green:#10b981;
+  --muted:#555;
+  --text:#000;
+  --btn-bg:#10b981;
+  --btn-text:#fff;
+}
+
+*{box-sizing:border-box;}
+body{margin:0; font-family:Inter, sans-serif; background: var(--bg); color: var(--text); transition: all 0.3s;}
+.wrap{width:100%; max-width:var(--max-width); margin:0 auto; padding:16px;}
+header{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:20px; gap:12px;}
+.brand{display:flex; align-items:center; gap:12px;}
+.logo{width:50px;height:50px;background:linear-gradient(135deg,#10b981,#047857);border-radius:12px;display:grid;place-items:center;font-weight:700;color:var(--text);font-size:26px;box-shadow:0 6px 14px rgba(0,0,0,0.4);}
+.title{font-size:17px;font-weight:700;}
+.subtitle{color:var(--muted); font-size:12px;}
+
+/* 🔥 Top buttons */
+.top-buttons {
+  display:flex; align-items:center; gap:6px; margin-bottom:7px;
+  flex-wrap:wrap;
+}
+.top-buttons a {
+  text-align:center;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  transition: all 0.3s ease;
+}
+.top-buttons a.live{ background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239,68,68,0.4);}
+.top-buttons a.mode{ background: linear-gradient(135deg, #6366f1, #4338ca); box-shadow: 0 4px 12px rgba(99,102,241,0.4);}
+.top-buttons a.watch{ background: linear-gradient(135deg, #ff0000, #b91c1c); box-shadow:0 4px 12px rgba(255,0,0,0.4);}
+.top-buttons a:hover { transform: scale(1.1) rotateZ(-2deg); box-shadow: 0 12px 30px rgba(0,0,0,0.4),0 0 20px rgba(255,255,255,0.3); filter: brightness(1.15); }
+
+/* 📌 Floating circular buttons */
+.corner-buttons {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:999;
+}
+.corner-buttons a {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:22px;
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 6px 14px rgba(0,0,0,0.3);
+  transition:all 0.3s ease;
+}
+.corner-buttons a.sub{ background: linear-gradient(135deg, #ff0000, #b91c1c);}
+.corner-buttons a.tg{ background: linear-gradient(135deg, #0088cc, #005f99);}
+.corner-buttons a:hover { transform: scale(1.2) rotateZ(8deg); box-shadow:0 14px 30px rgba(0,0,0,0.5),0 0 25px rgba(255,255,255,0.3); filter: brightness(1.2); }
+
+/* 🔘 Navigation buttons */
+.nav-buttons{display:flex; gap:8px; flex-wrap:wrap; width:100%; margin-top:8px;}
+.nav-buttons a{flex:1; text-align:center; padding:10px 0; border-radius:10px; font-weight:700; text-decoration:none; background:var(--btn-bg); color:var(--btn-text); transition:0.3s; box-shadow:0 4px 12px rgba(0,0,0,0.25);}
+.nav-buttons a:hover{transform:scale(1.05) rotateZ(-2deg); filter:brightness(1.1);}
+
+/* 🎬 Modern Video Grid */
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:20px;
+  margin-top:20px;
+}
+.video-tile{
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
+  background:var(--card);
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  flex-direction:column;
+}
+.video-tile img{
+  width:100%;
+  height:auto;
+  display:block;
+  transition:0.3s;
+  border-top-left-radius:16px;
+  border-top-right-radius:16px;
+}
+.video-tile:hover img{
+  transform:scale(1.05) rotateZ(1deg);
+}
+.video-content{
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  flex:1;
+}
+.video-title{
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:var(--text);
+  text-align:center;
+}
+.video-btn{
+  text-align:center;
+  background: linear-gradient(135deg,#ff0000,#b91c1c);
+  color:#fff;
+  font-weight:700;
+  border:none;
+  border-radius:8px;
+  padding:8px 12px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:0.3s;
+}
+.video-btn:hover{
+  transform:scale(1.05) rotateZ(-1deg);
+  filter: brightness(1.2);
+  box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* 📩 Contact box */
+footer{margin-top:20px; color:var(--muted); font-size:12px; text-align:center;}
+.contact-box{background:var(--card); padding:12px 16px; border-radius:10px; margin-top:20px; box-shadow:0 6px 18px rgba(0,0,0,0.3);}
+.contact-box p{margin:4px 0;}
+.contact-link{color:var(--accent); cursor:pointer; text-decoration:underline;}
+
+/* 📱 Mobile rules */
+@media(max-width:600px){
+  .nav-buttons { display:none; }
+  .corner-buttons { display:none; }
+  header { justify-content:space-between; width:100%; }
+  .brand { flex:1; justify-content:flex-start; }
+  .mobile-right {
+    display:flex; gap:8px; align-items:center; margin-left:auto;
+  }
+  .mobile-right a {
+    width:40px; height:40px; border-radius:50%;
+    display:flex; justify-content:center; align-items:center;
+    font-size:18px; color:#fff; text-decoration:none;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+  }
+  .mobile-right a.sub { background: linear-gradient(135deg, #ff0000, #b91c1c);}
+  .mobile-right a.tg { background: linear-gradient(135deg, #0088cc, #005f99);}
+}
+</style>
+</head>
+<body>
+
+<!-- 📌 Floating circular corner buttons (desktop only) -->
+<div class="corner-buttons">
+  <a class="sub" href="https://youtube.com/@khalidel-behjan?si=Xpm4oh18a2DIHX64" target="_blank">▶</a>
+  <a class="tg" href="https://t.me/YedanawTv" target="_blank">✈</a>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">📺</div>
+      <div>
+        <div class="title">Yedanaw TV</div>
+        <div class="subtitle">Quran – recitation stidio</div>
+      </div>
+    </div>
+
+    <!-- 📱 Mobile right corner buttons -->
+    <div class="mobile-right">
+      <a class="sub" href="https://youtube.com/@khalidel-behjan?si=Xpm4oh18a2DIHX64" target="_blank">▶</a>
+      <a class="tg" href="https://t.me/YedanawTv" target="_blank">➣</a>
+    </div>
+  </header>
+
+  <!-- 🔥 Top Action Buttons -->
+  <div class="top-buttons">
+    <a class="live" href="https://youtube.com/@khalidelbehjan2?si=xRQpwLpM6lUtiB43" target="_blank">🔴 Live Now</a>
+    <a class="mode" href="#" id="modeBtn">🌙 Mode</a>
+    <a class="watch" href="https://youtube.com/@khalidel-behjan" target="_blank">▶ Watch on YouTube</a>
+  </div>
+
+  <!-- 📚 Navigation -->
+  <div class="nav-buttons">
+    <a href="books.html">Books</a>
+    <a href="kitab.html">Kitab</a>
+  </div>
+
+  <!-- 🎬 Videos -->
+  <div class="video-grid" id="videos"></div>
+
+  <!-- 📩 Contact -->
+  <div class="contact-box">
+    <h4>📬 Contact Me ▼</h4>
+    <p>📧 Email: <span class="contact-link" onclick="copyToClipboard('infokhalidnet.com@gmail.com')">  infokhalidnet.com@gmail.com</span></p>
+    <p>☎️ Phone: <span class="contact-link" onclick="copyToClipboard('+251913530279')">+251 953548660</span></p>
+  </div>
+
+  <footer>
+    © <span id="year"></span> Yedanaw Television — Built with ♥
+  </footer>
+</div>
+
+<script>
+const videoLinks = [
+  {id:"Qa5hoV-WWx0", title:"▶ Surah Al-Qalam - ሱረቱል ቀለም 🥺አቀራር"},
+  {id:"DYAWJ3wB9zk", title:"▶ Emotional Qur'an Recitation   "},
+  {id:"_Ubbt3slE9s", title:"▶ ልብን  በሚነካ  ድምፅ "},
+  {id:"mna4qxhsvA0", title:"▶ ሱረቱል ፈጅር |የዳናው 📺 |"},
+  {id:"w-IxMnl5md0", title:"▶ ዶ/ር ሚስባህ ሳኒ ውብ ቲላዋ"},
+  {id:"fISpWd958Ak", title:"▶ ሱረቱል ሙናፊቁን በሸይኽ ያሲር"},
+  {id:"GLBBKj2Z5x0", title:"▶ ሸይኽ መንሱር ጣፋጭ የቁርዓን ቲላዋ"},
+  {id:"I6hIWAYwx-M", title:"▶ Surah Al-Mueminun"},
+  {id:"1cQk0nQBHEY", title:"▶ ሼኽ ዓፊፍ ታጅ"},
+  {id:"rI7X2WGEGWc", title:"▶ ቁርዓን መሳጭ በሆነ ድምፅ "},
+  {id:"6_JSXtYDTlU", title:"▶ ሸይኽ ኑረይን (ረሂመሁሏህ)"},
+  {id:"p7WzOxy3SsU", title:"▶ Alquran Kereem Sheikh Mahir |የዳናው 📺" },
+  {id:"TYoUS5gm1m8", title:"▶ Quran Recitacion "},
+  {id:"-HOY7X-qruw", title:"▶Hazaae Al Baloushi Amazing Voice"},
+  {id:"kcgZbM3jvJg", title:"Beautifull Recitation"},
+  {id:"3QqbpjRFQa8", title:"▶ Quran Tafseer Sheikh Abdul-Hakim"}
+];
+
+const videosContainer = document.getElementById('videos');
+videoLinks.forEach(v=>{
+  const tile = document.createElement('div');
+  tile.className='video-tile';
+  
+  const img = document.createElement('img');
+  img.src=`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+  img.alt=v.title;
+  
+  const content = document.createElement('div');
+  content.className='video-content';
+  
+  const title = document.createElement('div');
+  title.className='video-title';
+  title.textContent=v.title;
+  
+  const btn = document.createElement('a');
+  btn.className='video-btn';
+  btn.href=`https://youtu.be/${v.id}`;
+  btn.target="_blank";
+  btn.textContent="▶ Watch on YouTube";
+  
+  content.appendChild(title);
+  content.appendChild(btn);
+  
+  tile.appendChild(img);
+  tile.appendChild(content);
+  
+  videosContainer.appendChild(tile);
+});
+
+document.getElementById('year').textContent=new Date().getFullYear();
+
+const modeBtn=document.getElementById('modeBtn');
+modeBtn.addEventListener('click',(e)=>{
+  e.preventDefault();
+  if(document.documentElement.getAttribute('data-theme')==='white'){
+    document.documentElement.removeAttribute('data-theme');
+    modeBtn.textContent="☀ Mode";
+  }else{
+    document.documentElement.setAttribute('data-theme','white');
+    modeBtn.textContent="🌙Mode";
+  }
+});
+
+function copyToClipboard(text){
+  navigator.clipboard.writeText(text).then(()=>{ alert(text + " copied to clipboard!"); });
+}
+</script>
+
+</body>
+</html>
